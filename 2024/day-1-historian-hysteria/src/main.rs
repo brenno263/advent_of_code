@@ -1,4 +1,4 @@
-use std::{fs, iter};
+use std::fs;
 
 fn main() {
 
