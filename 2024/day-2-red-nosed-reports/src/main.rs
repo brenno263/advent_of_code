@@ -1,10 +1,13 @@
 use std::fs;
+use std::time::SystemTime;
 
 fn main() {
 
     let filename = "./input.txt";
     println!("reading input file: {filename}");
     let input = fs::read_to_string("./input.txt").expect(&format!("could not find file: {filename}"));
+
+    let start_time = SystemTime::now();
 
     let reports = input.lines()
         .map(|line| {
@@ -25,7 +28,7 @@ fn main() {
         if is_safe(&report) { acc + 1 } else { acc }
     });
 
-    println!("num safe is: {num_safe}");
+    let part_1_duration = start_time.elapsed().unwrap();
 
     // CHECKPOINT: Part 2 begins here
 
@@ -35,7 +38,14 @@ fn main() {
         if is_safe(&report) || dampened_reports.iter().any(is_safe) { acc + 1 } else { acc }
     });
 
+    let part_2_duration = start_time.elapsed().unwrap();
+
+    println!("part 1 elapsed time: {:?}", part_1_duration);
+    println!("part 2 elapsed time: {:?}", part_2_duration);
+
+    println!("num safe is: {num_safe}");
     println!("num safe when dampened is: {num_safe_dampened}")
+
 
 
 
